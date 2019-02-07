@@ -1,5 +1,6 @@
 package pl.mikroblog.model;
 
+import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.util.Set;
 /**
  * Created by bartek on 07.02.2019.
  */
+@Data
 @Entity
 @Table(name = "users")
 public class User {
