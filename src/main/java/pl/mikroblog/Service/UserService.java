@@ -1,6 +1,7 @@
 package pl.mikroblog.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.mikroblog.model.User;
 import pl.mikroblog.repository.UserRepository;
@@ -11,14 +12,16 @@ import java.util.Optional;
 /**
  * Created by bartek on 07.02.2019.
  */
-@Service
+@Service("UserService")
 public class UserService {
 
     private UserRepository userRepository;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     public List<User> getAllUsers() {
@@ -34,6 +37,13 @@ public class UserService {
     }
 
     public User saveUser(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
+
+    public User updateUser(User user) {
+        return userRepository.save(user);
+    }
+
+
 }

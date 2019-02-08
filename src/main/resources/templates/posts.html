@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Posts</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${posts.empty}">
+        <td colspan="2">No posts available</td>
+    </tr>
+    <table>
+        <span th:each="post : ${posts}">
+            <td>
+                <p th:text="${post.user.nick}"></p>
+                <p th:text="${post.content}"></p>
+                <p th:text="${post.createDate}"></p>
+                <tr th:each="comment: ${post.comments}">
+                    <p th:text="${comment.text}"></p>
+                </tr>
+
+                <form action="#" th:action="@{/post/3/addComent}" th:object="${comment}" method="post" role="form">
+                <h2>add comment</h2>
+                <div>
+                    <input th:type="text" th:field="*{text}" placeholder="content">
+                </div>
+
+                <div>
+                    <button type="submit">Add comment</button>
+                </div>
+
+             <h2><span th:utext="${successMessage}"></span> </h2>
+                </form>
+
+            </td>
+        </span>
+    </table>
+    <!--<tr th:each="post : ${posts}">-->
+    <!--<td><span th:text="${post.user.nick}"></span></td>-->
+    <!--<td><span th:text="${post.content}"></span></td>-->
+    <!--<td><span th:text="${post.createDate}"></span></td>-->
+
+    <!--&lt;!&ndash;<tr th:if="${post.comments.empty}">&ndash;&gt;-->
+    <!--&lt;!&ndash;<td colspan="2">No comments available</td>&ndash;&gt;-->
+    <!--<tr th:each="comment : ${post.comments}">-->
+    <!--<td><span th:text="${comment.text}"></span></td>-->
+    <!--</tr>-->
+    </tr>
+
+    </tr>
+    </tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>

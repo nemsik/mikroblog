@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+</head>
+<body>
+
+<form th:action="@{/}" method="get">
+    <button class="btn btn-md btn-warning btn-block" type="Submit">Go to posts</button>
+</form>
+
+<form action="#" th:action="@{/new}" th:object="${post}" method="post" role="form">
+    <h2>Registration</h2>
+    <div>
+        <label th:if="${#fields.hasErrors('content')}" th:error="*{content}"></label>
+        <input th:type="text" th:field="*{content}" placeholder="content" >
+    </div>
+
+    <div>
+        <button type="submit">Add post</button>
+    </div>
+
+    <h2><span th:utext="${successMessage}"></span> </h2>
+
+</form>
+
+</body>
+</html>
